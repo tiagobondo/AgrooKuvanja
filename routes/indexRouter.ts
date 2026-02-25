@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { connection } from "../app/config/connection";
-import { saveUser } from "../app/controller/userController";
+import { saveUser, loginUser } from "../app/controller/userController";
 import { saveImg } from "../app/controller/imgController";
 import { upload } from '../app/config/multer';
 
@@ -12,6 +12,7 @@ router.get('/', (req: Request, res: Response) => {
 })
 
 router.post('/usuario', saveUser);
-router.post('/img',upload.single("photo") ,saveImg)
+router.post('/img',upload.single("photo") ,saveImg);
+router.post('/login', loginUser);
 
 export default router;

@@ -38,10 +38,18 @@ const save = async (email: string, password: string, rec_password: string) => {
 const login = async (email: string, password: string) => {
     const verifyData = await userModel.findOne({ email });
 
-    if(verifyData == null){
-
+    if(email == '' || password == ''){
+        return 400;
     } else {
-        
+        if(verifyData == null){
+            return 405;
+        } else {
+            if(bcrypt.compareSync(password, verifyData.password)){
+                return 200;
+            } else {
+                return 401;
+            }
+        }
     }
 }
 
