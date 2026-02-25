@@ -22,8 +22,12 @@ const save = async (email: string, password: string, rec_password: string) => {
         if(email == '' || rec_password == '' || password == ''){
             return 401;
         } else {
-            const res = await data.save();
-            return 200;
+            if(password === rec_password){
+                return 405;
+            } else {
+                const res = await data.save();
+                return 200;  
+            } 
         }
     } else {
         return 405;
@@ -31,4 +35,14 @@ const save = async (email: string, password: string, rec_password: string) => {
 
 }
 
-export { save }
+const login = async (email: string, password: string) => {
+    const verifyData = await userModel.findOne({ email });
+
+    if(verifyData == null){
+
+    } else {
+        
+    }
+}
+
+export { save, login }
